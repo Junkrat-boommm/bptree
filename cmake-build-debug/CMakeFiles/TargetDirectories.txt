@@ -1,0 +1,3 @@
+C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/CMakeFiles/bptree.dir
+C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/CMakeFiles/rebuild_cache.dir

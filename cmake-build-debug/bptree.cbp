@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="bptree"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bptree">
+				<Option output="C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/bptree.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/Language/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="E:/Language/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="E:/Language/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 bptree"/>
+					<CompileFile command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bptree/fast">
+				<Option output="C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/bptree.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/Language/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="E:/Language/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="E:/Language/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 bptree/fast"/>
+					<CompileFile command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/Language/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/ganquan/CLionProjects/bptree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/bp_malloc.h">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/bplustree.c">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/bplustree.h">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/main.c">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/murmurhash3.c">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/murmurhash3.h">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/pagecache.h">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/pahecache.c">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/util.c">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/util.h">
+			<Option target="bptree"/>
+		</Unit>
+		<Unit filename="C:/Users/ganquan/CLionProjects/bptree/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
