@@ -6,22 +6,10 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/ganquan/CLionProjects/bptree/bp_malloc.h
-stdlib.h
--
-
-C:/Users/ganquan/CLionProjects/bptree/bplustree.c
-bplustree.h
-C:/Users/ganquan/CLionProjects/bptree/bplustree.h
-bp_malloc.h
-C:/Users/ganquan/CLionProjects/bptree/bp_malloc.h
-murmurhash3.h
-C:/Users/ganquan/CLionProjects/bptree/murmurhash3.h
-util.h
-C:/Users/ganquan/CLionProjects/bptree/util.h
-
 C:/Users/ganquan/CLionProjects/bptree/bplustree.h
 stdint.h
+-
+stdio.h
 -
 string.h
 C:/Users/ganquan/CLionProjects/bptree/string.h
@@ -29,18 +17,6 @@ C:/Users/ganquan/CLionProjects/bptree/string.h
 C:/Users/ganquan/CLionProjects/bptree/main.c
 stdio.h
 -
-string.h
--
-util.h
-C:/Users/ganquan/CLionProjects/bptree/util.h
-
-C:/Users/ganquan/CLionProjects/bptree/murmurhash3.h
-
-C:/Users/ganquan/CLionProjects/bptree/util.c
-util.h
-C:/Users/ganquan/CLionProjects/bptree/util.h
-
-C:/Users/ganquan/CLionProjects/bptree/util.h
 bplustree.h
 C:/Users/ganquan/CLionProjects/bptree/bplustree.h
 

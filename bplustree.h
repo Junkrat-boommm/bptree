@@ -4,6 +4,7 @@
 #ifndef BPTREE_BPLUSTREE_H
 #define BPTREE_BPLUSTREE_H
 #include <stdint.h>
+#include <stdio.h>
 #include "string.h"
 #define bpInterNodeMeta \
     uint8_t type;       \
@@ -35,12 +36,12 @@
 #define INTER_MIN_SIZE 10
 #define BITMAP_LEN 8
 #define LEAF_NODE_HEADER_LEN 1 + sizeof(size_t) * 3 + sizeof(void *) * 3 + BITMAP_LEN
-#define INTER_NODE_HEADER_LEN 1 + sizeof(size_t) * 2 + sizeof(off_t) * 3 + sizeof(void *)
+#define INTER_NODE_HEADER_LEN (1 + sizeof(size_t) * 2 + sizeof(off_t) * 3 + sizeof(void *))
 #define PREFIX_LEN 128
-#define MAX_LEAF_NODE_SIZE 32
+#define MAX_LEAF_NODE_SIZE 8
+#define MIN_LEAF_NODE_SIZE 32
 #define MAX_INTER_NODE_SIZE 32
 #define MIN_INTER_NODE_SIZE 16
-#define MIN_LEAF_NODE_SIZE 16
 #define MAX_INTER_NODE_ITEM_BYTES KEY_MAX_SIZE_IN_IN + 1 + sizeof(off_t) + sizeof(void *)
 #define LEAF_NODE_ITEM_SIZE 128
 
@@ -92,33 +93,33 @@ typedef struct bpTree {
 bpTree *bpTreeNew(void);
 bpInterNode *bpInterNodeNew(void);
 bpLeafNode *bpLeafNodeNew(void);
-uint64_t bpFind(bpTree *t, unsigned char *key);
-int bpInsert(bpTree *t, unsigned char *key, uint64_t data);
-int bpRemove(bpTree *bpTree, unsigned char *key);
-void *bpInterNodeFind(bpTree *t, bpInterNode *interNode, unsigned char *key);
-uint64_t bpLeafNodeFind(bpTree *t, bpLeafNode *leafNode, unsigned char *key);
-int OffBinarySearch(bpTree *t, bpInterNode *interNode, unsigned char *key);
-void fpBinarySearch(bpTree *t, bpLeafNode *leafNode, unsigned char *key, int *success);
-int _bpLeafNodeInsert(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data, int fpPos);
-int bpLeafNodeInsert(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data);
-int _bpLeafNodeRemove(bpTree *t, bpLeafNode *leafNode, unsigned char *key);
-int leafCompareWithKey(bpTree *t, bpLeafNode *leafNode, unsigned char *key, KV *kv);
-int _bpInterNodeInsert(bpTree *t, bpInterNode *interNode, void *child1, void *child2, unsigned char *key);
-void bpInterNodeInsert(bpTree *t, bpInterNode *interNode, void *child1, void *child2, unsigned char *key, int LeftOrRight);
+uint64_t bpFind(bpTree *t, unsigned char *key, int len);
+int bpInsert(bpTree *t, unsigned char *key, uint64_t data, int len);
+int bpRemove(bpTree *bpTree, unsigned char *key, int len);
+void *bpInterNodeFind(bpTree *t, bpInterNode *interNode, unsigned char *key, int len);
+uint64_t bpLeafNodeFind(bpTree *t, bpLeafNode *leafNode, unsigned char *key, int len);
+int OffBinarySearch(bpTree *t, bpInterNode *interNode, unsigned char *key, int len);
+void fpBinarySearch(bpTree *t, bpLeafNode *leafNode, unsigned char *key, int *success, int len);
+int _bpLeafNodeInsert(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data, int fpPos, int len);
+int bpLeafNodeInsert(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data, int len);
+int _bpLeafNodeRemove(bpTree *t, bpLeafNode *leafNode, unsigned char *key, int len);
+int leafCompareWithKey(bpTree *t, bpLeafNode *leafNode, unsigned char *key, KV *kv, int len);
+// int _bpInterNodeInsert(bpTree *t, bpInterNode *interNode, void *child1, void *child2, unsigned char *key);
+void bpInterNodeInsert(bpTree *t, bpInterNode *interNode, void *child1, void *child2, unsigned char *key, int LeftOrRight, int len);
 int _bpLeafNodeRemoveWithPos(bpTree *t, bpLeafNode *leafNode, int pos);
 void bpInterNodeModifyOffset(bpInterNode *interNode, int pos, int off);
 int bpInterNodeTryMerge(bpTree *t, bpInterNode *interNode);
 void bpInterNodeMoveForNewKeyWithLeftChild(bpTree *t, bpInterNode *interNode, int pos, int len);
 void bpInterNodeMoveForNewKeyWithRightChild(bpTree *t, bpInterNode *interNode, int pos, int len);
-int _bpInterNodeInsertWithLeftChild(bpTree *t, bpInterNode *interNode, void *child, unsigned char *key);
-int _bpInterNodeInsertWithRightChild(bpTree *t, bpInterNode *interNode, void *child, unsigned char *key);
+int _bpInterNodeInsertWithLeftChild(bpTree *t, bpInterNode *interNode, void *child, unsigned char *key, int len);
+int _bpInterNodeInsertWithRightChild(bpTree *t, bpInterNode *interNode, void *child, unsigned char *key, int len);
 void bpInterNodeShiftFromRight(bpTree *t, bpInterNode *interNode);
 void bpInterNodeShiftFromLeft(bpTree *t, bpInterNode *interNode);
 int bpInterNodeRemoveLeftChild(bpTree *t, bpInterNode *interNode, int pos);
 int bpInterNodeRemoveRightChild(bpTree *t, bpInterNode *interNode, int pos);
 void bpInterNodeSetMeta(bpTree *t, bpInterNode *interNode, int keyLen);
 void bpInterNodeSetChildAddr(bpInterNode *interNode, int pos, void *child);
-int bpLeafNodeSplit(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data);
+int bpLeafNodeSplit(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data, int len);
 void _bpInterNodeMergeWithRight(bpTree *t, bpInterNode *interNode);
 void _bpInterNodeMergeWithLeft(bpTree *t, bpInterNode *interNode);
 bpInterNode *prevBrother(bpTree *t, bpInterNode *interNode);
@@ -126,5 +127,6 @@ bpInterNode *nextBrother(bpTree *t, bpInterNode *interNode);
 void bpInterNodeFree(bpInterNode *interNode);
 void setChildrenParent(bpInterNode *interNode, bpInterNode *parent);
 void bpInterNodeSetChildrenBrothers(bpInterNode *interNode, int pos, int begin);
+int setBitmap(uint8_t bitmap[], int pos, int v);
 
 #endif //BPTREE_BPLUSTREE_H

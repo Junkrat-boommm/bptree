@@ -8,4 +8,5 @@
 #include "bplustree.h"
 int keyCompare(uint8_t *c1, uint8_t *c2, int l1, int l2);
 int keyCompareWithMove(uint8_t **c1, uint8_t *c2, int l1, int l2);
+int keyContain(uint8_t *c1, uint8_t *c2, int l1, int l2);
 #endif //BPTREE_UTIL_H
