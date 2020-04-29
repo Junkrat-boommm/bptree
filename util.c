@@ -17,7 +17,7 @@ int keyCompare(unsigned char *c1, unsigned char *c2, int l1, int l2) {
 
 int keyCompareWithMove(uint8_t **c1, uint8_t *c2, int l1, int l2) {
     if (l1 == 0 && l2 != 0) return -1;
-    if (l2 == 0 && l1 != 0) return 1;
+    // if (l2 == 0 && l1 != 0) return 1;
     for(; l1>0 && l2>0 ; (*c1)++, c2++, l1--, l2--) {
         if(**c1 != *c2) {
             return (**c1 > *c2) ? 1 : -1;
