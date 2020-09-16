@@ -36,26 +36,27 @@
 #define INTER_MIN_SIZE 10
 #define BITMAP_LEN 8
 #define LEAF_NODE_HEADER_LEN (1 + sizeof(size_t) * 3 + sizeof(void *) * 3 + BITMAP_LEN)
-#define INTER_NODE_HEADER_LEN (1 + sizeof(size_t) * 2 + sizeof(off_t) * 3 + sizeof(void *)) // 31
-#define PREFIX_LEN 128
-#define MAX_LEAF_NODE_SIZE 6
-#define MIN_LEAF_NODE_SIZE 32
+// #define INTER_NODE_HEADER_LEN (1 + sizeof(size_t) * 2 + sizeof(off_t) * 2 + sizeof(void *)) // 29
+#define INTER_NODE_HEADER_LEN (sizeof(struct bpInterNode)) // 29
+#define PREFIX_LEN 4
+#define MAX_LEAF_NODE_SIZE 10
+#define MIN_LEAF_NODE_SIZE 3
 #define MAX_INTER_NODE_SIZE 4
-#define MIN_INTER_NODE_SIZE 16
+#define MIN_INTER_NODE_SIZE 3
 #define MAX_INTER_NODE_ITEM_BYTES KEY_MAX_SIZE_IN_IN + 1 + sizeof(off_t) + sizeof(void *)
 #define LEAF_NODE_ITEM_SIZE 128
 
 
-#define interKeyLen(n, i) ((i == n->size - 1) ? (n->children - n->keys) : *(off_t *)(n->data + (i+1) * sizeof(off_t))) - *(off_t *)(n->data + i * sizeof(off_t))
+#define interKeyLen(n, i) ((i == n->size - 1) ? (n->children - n->keys) : *(off_t *)(n->data + (i+1) * sizeof(off_t))) - *(off_t *)(n->data + (i) * sizeof(off_t))
 #define leafKeyLen(addr) *(uint32_t *)((uint8_t *)addr+FLAGS_LEN)
 #define interKeyOffset(n, i) (*(off_t *)(n->data + (i) * sizeof(off_t)))
 #define interKeyAddr(n, i) (n->data + n->keys + interKeyOffset(n, i))
-#define interChildAddr(n, i) (n->data + n->children + sizeof(void *) * i)
-#define interOffsetAddr(n, i) (n->data + sizeof(off_t) * i)
+#define interChildAddr(n, i) (n->data + n->children + sizeof(void *) * (i))
+#define interOffsetAddr(n, i) (n->data + sizeof(off_t) * (i))
 #define interKeysAddr(n) (n->data + n->keys)
 #define interChildrenAddr(n) (n->data + n->children)
 #define leafFpsAddr(n) (n->data + PREFIX_LEN)
-#define keyFpAddr(n, i) (leafFpsAddr(n) + i * (FP_OFFSET_LEN))
+#define keyFpAddr(n, i) (leafFpsAddr(n) + (i) * (FP_OFFSET_LEN))
 #define leafKeysAddr(n) (n->data + PREFIX_LEN + LEAF_NODE_SIZE * (FP_OFFSET_LEN))
 #define leafKeyOffset(n, i) (*((off_t *) (keyFpAddr(leafNode, i) + sizeof(fp_t))))
 #define leafKeyAddr(n, i) leafKeysAddr(n) + leafKeyOffset(n, i)
@@ -70,8 +71,6 @@ typedef struct bpInterNode {
     off_t keys;
     off_t children;
     void *parent;
-    // void *next;
-    // void *prev;
     uint8_t data[];
 } bpInterNode;
 
@@ -122,11 +121,11 @@ void bpLeafNodeSplit(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64
 int _bpLeafNodeInsert(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data, int fpPos, int len);
 int bpLeafNodeInsert(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data, int len);
 int _bpLeafNodeRemove(bpTree *t, bpLeafNode *leafNode, unsigned char *key, int len);
+void bpLeafNodeSplit(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data, int len);
 void bpLeafNodeShiftFromLeft(bpTree *t, bpLeafNode *leafNode);
 int leafCompareWithKey(bpTree *t, bpLeafNode *leafNode, unsigned char *key, KV *kv, int len);
 // int _bpInterNodeInsert(bpTree *t, bpInterNode *interNode, void *child1, void *child2, unsigned char *key);
 void bpInterNodeInsert(bpTree *t, bpInterNode *interNode, void *child1, void *child2, unsigned char *key, int LeftOrRight, int len);
-int _bpLeafNodeRemoveWithPos(bpTree *t, bpLeafNode *leafNode, int pos);
 void bpInterNodeModifyOffset(bpInterNode *interNode, int pos, int off);
 int bpInterNodeTryMerge(bpTree *t, bpInterNode *interNode);
 void bpInterNodeMoveForNewKeyWithLeftChild(bpTree *t, bpInterNode *interNode, int pos, int len);
@@ -139,7 +138,7 @@ int bpInterNodeRemoveLeftChild(bpTree *t, bpInterNode *interNode, int pos);
 int bpInterNodeRemoveRightChild(bpTree *t, bpInterNode *interNode, int pos);
 void bpInterNodeSetMeta(bpTree *t, bpInterNode *interNode, int keyLen);
 void bpInterNodeSetChildAddr(bpInterNode *interNode, int pos, void *child);
-void bpLeafNodeSplit(bpTree *t, bpLeafNode *leafNode, unsigned char *key, uint64_t data, int len);
+int _bpLeafNodeRemoveWithPos(bpTree *t, bpLeafNode *leafNode, int pos);
 void _bpInterNodeMergeWithRight(bpTree *t, bpInterNode *interNode, int keyPos);
 void _bpInterNodeMergeWithLeft(bpTree *t, bpInterNode *interNode, int keyPos);
 bpInterNode *prevBrother(bpTree *t, bpInterNode *interNode, int pos);
@@ -150,5 +149,13 @@ void bpInterNodeSetChildrenBrothers(bpInterNode *interNode, int pos, int begin);
 int OffBinarySearch(bpTree *t, bpInterNode *interNode, unsigned char *key, int len);
 int bpLeafNodeTryMerge(bpTree *t, bpLeafNode *leafNode);
 int setBitmap(uint8_t bitmap[], int pos, int v);
+void printInterNode(bpInterNode *t);
+void bpLeafNodeFree(bpLeafNode *leafNode);
+int bpLeafFindMaxExceptMax(bpLeafNode *leafNode, int pos);
+int bpLeafFindMinExceptMin(bpLeafNode *leafNode, int pos);
+void bpLeafNodeShiftFromRight(bpTree *t, bpLeafNode *leafNode);
+void bpLeafNodeShiftFromLeft(bpTree *t, bpLeafNode *leafNode);
+void setParent(void *node, bpInterNode *interNode);
+
 
 #endif //BPTREE_BPLUSTREE_H
